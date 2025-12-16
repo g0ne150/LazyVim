@@ -158,13 +158,9 @@ return {
         end
       end
 
-      -- Allow users to add custom bundles through opts.init_options.bundles and opts.jdtls.init_options.bundles
+      -- Allow users to add custom bundles through opts.init_options.bundles
       if opts.init_options and opts.init_options.bundles then
         vim.list_extend(bundles, opts.init_options.bundles)
-      end
-      if opts.jdtls and opts.jdtls.init_options and opts.jdtls.init_options.bundles then
-        vim.list_extend(bundles, opts.jdtls.init_options.bundles)
-        opts.jdtls.init_options.bundles = nil
       end
 
       local function attach_jdtls()
