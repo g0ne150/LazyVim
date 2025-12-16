@@ -25,6 +25,17 @@ return {
     },
   },
 
+  -- copilot-language-server
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- copilot.lua only works with its own copilot lsp server
+        copilot = { enabled = false },
+      },
+    },
+  },
+
   -- add ai_accept action
   {
     "zbirenbaum/copilot.lua",
@@ -74,9 +85,9 @@ return {
                 copilot_cmp.setup(opts)
                 -- attach cmp source whenever copilot attaches
                 -- fixes lazy-loading issues with the copilot cmp source
-                LazyVim.lsp.on_attach(function()
+                Snacks.util.lsp.on({ name = "copilot" }, function()
                   copilot_cmp._on_insert_enter({})
-                end, "copilot")
+                end)
               end,
               specs = {
                 {

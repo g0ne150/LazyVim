@@ -58,10 +58,10 @@ return {
       },
       setup = {
         [ruff] = function()
-          LazyVim.lsp.on_attach(function(client, _)
+          Snacks.util.lsp.on({ name = ruff }, function(_, client)
             -- Disable hover in favor of Pyright
             client.server_capabilities.hoverProvider = false
-          end, ruff)
+          end)
         end,
       },
     },
@@ -103,11 +103,7 @@ return {
         { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
       },
       config = function()
-        if vim.fn.has("win32") == 1 then
-          require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/Scripts/pythonw.exe"))
-        else
-          require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/bin/python"))
-        end
+        require("dap-python").setup("debugpy-adapter")
       end,
     },
   },
